@@ -4,8 +4,7 @@ import currencies as cur
 import users_db
 import datetime
 import threading
-
-TOKEN = "5960856662:AAFGdwozhammIXhjaMdaaXYCnto-VEOrTrI"
+from config import *
 
 bot = telebot.TeleBot(TOKEN)
 
