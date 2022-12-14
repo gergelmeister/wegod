@@ -23,7 +23,9 @@ def add_buttons(agreement):
 
 
 def rate_reminder():
+    event = threading.Event()
     while True:
+        print("Я здеся")
         base = users_db.get_base()
         for user in base:
             if user[2] == 1:
@@ -31,6 +33,7 @@ def rate_reminder():
                     text = f"""Сейчас ты получишь {str(cur.get_currency_rate('KZT'))} рублей за 1 тенге и {str(cur.get_currency_rate('KZT', back=True))} тенге за 1 рубль"""
                     bot.send_message(user[0], text, reply_markup=add_buttons(users_db.get_agreement(user[0])))
                     users_db.set_last_interaction(user[0])
+        event.wait(timeout=60)
 
 
 @bot.message_handler(commands=['start'])
